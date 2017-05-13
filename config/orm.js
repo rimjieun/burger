@@ -22,36 +22,36 @@ function objToSql(obj) {
 }
 
 var orm = {
-  selectAll: function(tableName, callback) {
+  selectAll: function(tableName, cb) {
     var queryString = "SELECT * FROM " + tableName + ";";
     connection.query(queryString, function(err, result) {
       if (err) throw err;
-      callback(result);
+      cb(result);
     });
   },
 
-  insertOne: function(tableName, columns, values, callback) {
-    var queryString = "INSERT INTO " + table;
+  insertOne: function(tableName, cols, vals, cb) {
+    var queryString = "INSERT INTO " + tableName;
 
-    queryString += " (" + columns.toString(); + ") VALUES (" + printQuestionMarks(values.length) + ")";
+    queryString += " (" + cols.toString() + ") VALUES (" + printQuestionMarks(vals.length) + ")";
 
     console.log(queryString);
 
-    connection.query(queryString, values, function(err, result) {
+    connection.query(queryString, vals, function(err, result) {
       if (err) throw err;
-      callback(result);
+      cb(result);
     });
   },
 
-  updateOne: function(tableName, object, condition, callback) {
-    var queryString = "UPDATE " + table;
+  updateOne: function(tableName, object, condition, cb) {
+    var queryString = "UPDATE " + tableName;
 
-    queryString += " SET" + objToSql(object) + " WHERE " + condition;
+    queryString += " SET " + objToSql(object) + " WHERE " + condition;
 
     console.log(queryString);
     connection.query(queryString, function(err, result) {
       if (err) throw err;
-      callback(result);
+      cb(result);
     });
   }
 };
